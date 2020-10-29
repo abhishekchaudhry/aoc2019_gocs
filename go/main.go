@@ -6,6 +6,10 @@ import (
 	"os"
 )
 
+func checkFuel(m int) int{
+	return (m / 3) -2
+}
+
 func main() {
 
 	file,err := os.Open("input/day1.txt")
@@ -14,7 +18,8 @@ func main() {
 	}
 	defer file.Close()
 
-	fuel := 0
+
+	total :=0
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan(){
 		line := scanner.Text()
@@ -24,8 +29,15 @@ func main() {
 			panic(err)
 		}
 
-		fuel += (mass/3) -2
+		fuel := checkFuel(mass)
+		for fuel >= 0 {
+			total += fuel
+			fuel = checkFuel(fuel)
+		}
+
+
+		//fuel += (mass/3) -2
 	}
 
-	fmt.Println(fuel)
+	fmt.Println(" fuel needed for second case",total)
 }
