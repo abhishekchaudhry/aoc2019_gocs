@@ -25,6 +25,40 @@ func checkOrder (seq []int) bool{
 		}
 		return asc && pair
 }
+
+func checkOrderpart2 (seq []int) bool {
+	asc := true
+	pair := false
+	count := 0
+
+	fmt.Println(seq[1])
+
+	for i := 0; i < len(seq); i++ {
+		if i == 0 {
+			continue
+		}
+		lastdigit := seq[i-1]
+		if seq[i] < lastdigit {
+			asc = false
+		}
+		if seq[i] == lastdigit {
+			pair = true
+			count = count + 1
+		}
+	}
+
+	/*	for key,value := range seq {
+		if key == 0 { continue }
+		lastDigit :=seq[key-1]
+		if value < lastDigit { asc = false}
+		if value == lastDigit { pair = true}
+	}*/
+	if count == 2 {
+		return asc && pair
+	} else {
+		return false
+	}
+}
 func main() {
 	var input_seq []int
 	count :=0
@@ -38,12 +72,16 @@ func main() {
 
 		x := input_seq[i]
 		seq = IntToSlice(x,seq)
-		fmt.Println(seq)
+		//fmt.Println(seq)
+		//fmt.Println(seq[2])
 
 		if checkOrder(seq){
 			count++
 		}
 
+/*				if checkOrderpart2(seq){
+				count++
+			}*/
 
 /*			for key:=0;key<6;key++{
 				raising := 0
