@@ -46,3 +46,4 @@ func Test_checkTotalFuel(t *testing.T) {
 		})
 	}
 }
+
